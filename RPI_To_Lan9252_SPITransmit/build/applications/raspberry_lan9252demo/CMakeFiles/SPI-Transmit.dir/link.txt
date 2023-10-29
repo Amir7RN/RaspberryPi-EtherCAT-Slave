@@ -1,0 +1,1 @@
+/usr/bin/cc -rdynamic CMakeFiles/SPI-Transmit.dir/SPI_Transmit.c.o CMakeFiles/SPI-Transmit.dir/slave_objectlist.c.o -o SPI-Transmit  ../../soes/libsoes.a -lbcm2835 
