@@ -46,6 +46,7 @@ void cb_transmit(void)
     
     do {
         transmit_value = generate_random_value();
+        // for some reason I got "segmentation fault when the value "56" is transmitting.
     } while (transmit_value == 56);
     
     SPI_transmit(transmit_value);
