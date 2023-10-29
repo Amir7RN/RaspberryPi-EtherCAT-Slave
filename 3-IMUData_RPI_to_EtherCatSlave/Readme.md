@@ -5,10 +5,11 @@ This guide explains how to transmit IMU data via EtherCAT and monitor it in Twin
 ## Modify the IMU C++ Code
 Add the following lines to the IMU C++ code (found in the "StreamData_to_RPI" directory):
 
-```cpp
+```
 extern "C" {
 void getSensorData(int* Pitch, int* Roll, int* Yaw, int* GyroX, int* GyroY, int* GyroZ, int* AccelX, int* AccelY, int* AccelZ) {
-}```
+}
+```
 
 You can find the full code in "IMUDATA_SPI_EtherCatSlave/application/raspberry_lan9252demo/getSensorData.cpp."
 
