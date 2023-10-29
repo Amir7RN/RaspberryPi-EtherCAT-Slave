@@ -1,5 +1,5 @@
 Raspberry Pi to LAN9252 EtherCAT Slave Data Transmission
-This project demonstrates the transmission of a random number from a Raspberry Pi to a LAN9252 EtherCAT slave. The source code can be found in the SOES GitHub repository (all credits belong to them).
+This project demonstrates the transmission of a random number from a Raspberry Pi to a LAN9252 EtherCAT slave. The source code can be found in the SOES GitHub repository.
 
 Prerequisites
 Before you can transmit data using SPI (Serial Peripheral Interface), you need to install the "Broadcom BCM 2835" package. Please follow the installation instructions provided at http://www.airspayce.com/mikem/bcm2835/index.html.
