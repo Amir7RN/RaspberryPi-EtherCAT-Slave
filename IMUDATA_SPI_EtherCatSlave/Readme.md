@@ -1,4 +1,4 @@
-Stream IMU data to RPI and then Transmit to LAN 9252 using SPI communication
+# Stream IMU data to RPI and then Transmit to LAN 9252 using SPI communication
 
 This guide explains how to transmit IMU data via EtherCAT and monitor it in TwinCat. The SPI transmission is limited to C, so we create a C library to wrap the C++ code for streaming IMU data. 
 
