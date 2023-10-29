@@ -1,4 +1,4 @@
-Raspberry Pi to LAN9252 EtherCAT Slave Data Transmission
+# Raspberry Pi to LAN9252 EtherCAT Slave Data Transmission
 This project demonstrates the transmission of a random number from a Raspberry Pi to a LAN9252 EtherCAT slave. The source code can be found in the SOES GitHub repository.
 
 Prerequisites
@@ -7,7 +7,7 @@ Before you can transmit data using SPI (Serial Peripheral Interface), you need t
 Navigate to the RPI_To_Lan9252_SPITransmit/applications/raspberry_lan9252demo directory, you will find the SPI_Transmit code. This code generates a random number and transmits it to the LAN9252 EtherCAT slave and assigned it to an input of its memory.
 
 
-Building the Executable
+## Building the Executable
 To build the executable, follow these steps:
 
 Clone the SOES GitHub repository:
@@ -22,7 +22,7 @@ line 478 bcm2835_spi_setDataMode(BCM2835_SPI_MODE0); ---> bcm2835_spi_setDataMod
 
 Modify the main.c code in the RPI_To_Lan9252_SPITransmit/applications/raspberry_lan9252demo directory. The code has been adjusted to transform a random number and renamed as "SPI_Transmit." Make sure the name is adjusted in the CMakeLists.txt file in the same directory.
 
-In the slave_objectlist.c file, you can adjust the inputs and outputs of the EtherCAT slave. By default, it has 96 inputs and 96 outputs. If you need to change the size of inputs or outputs, follow these steps:
+# In the slave_objectlist.c file, you can adjust the inputs and outputs of the EtherCAT slave. By default, it has 96 inputs and 96 outputs. If you need to change the size of inputs or outputs, follow these steps:
 
 For line 377 and other similar lines, adjust the inputs' size:
 
@@ -65,6 +65,8 @@ Adjust the required properties for your specific application in line 66:
 
 Indicate the Raspberry Pi version and which slave number you are using (CS0 or CS1).
 
+## Make Executable 
+
 After making these changes, navigate to the main directory:
 
 ```cd ../../../RPI_To_Lan9252_SPITransmit```
@@ -75,3 +77,8 @@ Then build the executable:
 ```cmake -B build -DRPI_VARIANT=ON```
 
 ```cmake --build build```
+
+## Run Executable
+Navigate to the directory: "RPI_To_Lan9252_SPITransmit/build/applications/raspberry_lan9252demo"
+
+```sudo ./SPI-Transmit```
