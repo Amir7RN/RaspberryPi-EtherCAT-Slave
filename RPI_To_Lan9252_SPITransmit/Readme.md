@@ -22,7 +22,8 @@ line 478 bcm2835_spi_setDataMode(BCM2835_SPI_MODE0); ---> bcm2835_spi_setDataMod
 
 Modify the main.c code in the RPI_To_Lan9252_SPITransmit/applications/raspberry_lan9252demo directory. The code has been adjusted to transform a random number and renamed as "SPI_Transmit." Make sure the name is adjusted in the CMakeLists.txt file in the same directory.
 
-# In the slave_objectlist.c file, you can adjust the inputs and outputs of the EtherCAT slave. By default, it has 96 inputs and 96 outputs. If you need to change the size of inputs or outputs, follow these steps:
+# slave options
+In the slave_objectlist.c file, you can adjust the inputs and outputs of the EtherCAT slave. By default, it has 96 inputs and 96 outputs. If you need to change the size of inputs or outputs, follow these steps:
 
 For line 377 and other similar lines, adjust the inputs' size:
 
