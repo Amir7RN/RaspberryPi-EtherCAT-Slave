@@ -61,13 +61,16 @@ In this demo, the random number is assigned to input IMU1_Pitch (line 58 in SPI_
 Adjust the required properties for your specific application in line 66:
 
 ```.user_arg = "rpi4,cs1",```
+
 Indicate the Raspberry Pi version and which slave number you are using (CS0 or CS1).
 
 After making these changes, navigate to the main directory:
 
 ```cd ../../../RPI_To_Lan9252_SPITransmit```
+
 Then build the executable:
 
 
 ```cmake -B build -DRPI_VARIANT=ON```
+
 ```cmake --build build```
