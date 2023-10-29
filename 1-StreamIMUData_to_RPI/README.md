@@ -1,6 +1,6 @@
 # Stream IMU data to Raspberry PI
 
-The Microstrain 3DM-CV7-AHRS IMU allows data streaming through UART serial communication (more details: `https://www.microstrain.com/inertial-sensors/3dm-cv7-ahrs`). 
+The Microstrain 3DM-CV7-AHRS IMU allows data streaming through UART serial communication (more details: https://www.microstrain.com/inertial-sensors/3dm-cv7-ahrs). 
 By connecting the IMU to a Raspberry Pi (RPI), you can effectively stream data using the following instructions:
 
 
