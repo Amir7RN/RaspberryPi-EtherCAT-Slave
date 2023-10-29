@@ -10,9 +10,12 @@ extern "C" {
 void getSensorData(int* Pitch, int* Roll, int* Yaw, int* GyroX, int* GyroY, int* GyroZ, int* AccelX, int* AccelY, int* AccelZ) {
 }```
 
-full code can be found in IMUDATA_SPI_EtherCatSlave/application/raspberry_lan9252demo/getSensorData.cpp
+You can find the full code in "IMUDATA_SPI_EtherCatSlave/application/raspberry_lan9252demo/getSensorData.cpp."
 
-make the header for c++ code (IMUDATA_SPI_EtherCatSlave/application/raspberry_lan9252demo/getSensorData.h):
+## Create a Header for the C++ Code
+Create a header file for the C++ code (named "getSensorData.h") with the following content:
+
+
 ```
 #ifndef GETSENSORDATA_H
 #define GETSENSORDATA_H
@@ -30,20 +33,16 @@ void getSensorData(int* IMU1_Pitch,int* IMU1_Roll,int* IMU1_Yaw,int* IMU1_GyroX,
 #endif```
 
 
-add the created header to main.c file which is needed for transmitting data using spi:
+Add this header to your main C code, which is needed for transmitting data using SPI. Include it in the "main.c" file:
+
 Check directory IMUDATA_SPI_EtherCatSlave/applications/raspberry_lan9252demo/main.c for comments and details
 
 ```#include "getSensorData.h"```
 
-other required libraries are:
-```#include <unistd.h>
-#include <stdlib.h>
-#include "getSensorData.h"
-#include <pthread.h>
-#include <string.h>
-#include "lan9252_spi.c"```
+Make sure to include other required libraries, such as "unistd.h," "stdlib.h".
 
-GetSensor Data that is streaming from c++ code:
+## Stream Sensor Data from C++
+
 ```
 
 int Pitch, Roll, Yaw, GyroX, GyroY, GyroZ, AccelX, AccelY, AccelZ;
@@ -73,7 +72,8 @@ void* Thread(void* arg) {
 }
 ```
 
-then Trasnfer it via SPI:
+## Transmit Data via SPI
+Use SPI to transfer data from the Raspberry Pi to the allocated memory of the LAN 9252.
 It is recommended to use bcm2835_spi_transfernb rather than bcm2835_spi_transmit to accurately transmit data, in order to do so I copied the ecat_slv.c content to a new .c file (lan9252_spi.c) and add it as a library to main.c code:
 
 ```
@@ -112,7 +112,10 @@ int16_t SPI_transmit_int(int data)
 }
 ```
 
-send SPI transferred data to the allocated memory of LAN 9252, can be tracked in xml file in the master PC:
+## Sending SPI Transferred Data to LAN 9252 Memory
+
+This section explains how to send data transferred via SPI to the allocated memory of the LAN 9252 device. This data can be monitored and tracked in the gb_lan.xml file on the master PC.
+
 ```
 int Received_data[9];
 
@@ -146,8 +149,12 @@ void cb_set_outputs(int Pitch, int Roll, int Yaw, int GyroX, int GyroY, int Gyro
 
 }
 ```
+The cb_set_outputs function takes sensor data (Pitch, Roll, Yaw, GyroX, GyroY, GyroZ, AccelX, AccelY, AccelZ) and processes it to be transmitted via SPI to the LAN 9252 memory. This process ensures data synchronization between devices.
 
-the main_run block of c code (starting from line 114; focus on 140):
+
+
+## Main Program Execution
+In the main C code, from line 114 and onwards, a dedicated thread is created to handle the sensor data. This thread is responsible for retrieving data and managing its transmission.
 ```
 pthread_t thread;
     int sensorData[18]; // Array to hold sensor values
@@ -167,14 +174,11 @@ pthread_t thread;
     pthread_join(thread, NULL);
 ```
 
-Adjust the required properties for your specific application in line 118:
+This code block ensures the continuous execution of the EtherCAT slave's functionality while concurrently handling sensor data. Please adjust the parameters in line 118 (.user_arg = "rpi4,cs1") to match your specific application requirements.
 
-```
-.user_arg = "rpi4,cs1",
-```
 
-Afterward by modifying the C and C++ code (main.c and getSensorData.cpp), the CMakeList should be adjusted as follows (check IMUDATA_SPI_EtherCatSlave/applications/raspberry_lan9252demo
-/CMakeLists.txt for comments and details):
+## CMake Configuration
+To compile and build the project, the CMakeLists file needs to be configured correctly. Be sure to adjust it as follows in the IMUDATA_SPI_EtherCatSlave/applications/raspberry_lan9252demo/CMakeLists.txt file:
 
 ```
 cmake_minimum_required(VERSION 3.12)
@@ -225,19 +229,22 @@ Modify cb_set_outputs of ecat_slv.c in IMUDATA_SPI_EtherCatSlave/soes/ecat_slv.c
 void cb_set_outputs(int IMU1_Pitch, int IMU1_Roll, int IMU1_Yaw, int IMU1_GyroX, int IMU1_GyroY, int IMU1_GyroZ, int IMU1_AccelX, int IMU1_AccelY, int IMU1_AccelZ);
 ```
 
-for making the executable, navigate to the directory:
-```../../../IMUDATA_SPI_EtherCatSlave```
+## Building the Executable
+To create the executable, navigate to the "IMUDATA_SPI_EtherCatSlave" directory and run the following commands:
 
-and run:
 ```cmake -B build -DRPI_VARIANT=ON```
 
 ```and then do cmake --build build```
 
-run the executable in IMUDATA_SPI_EtherCatSlave/build/applications/raspberry_lan9252demo
+## Running the Application
+Run the executable located in "IMUDATA_SPI_EtherCatSlave/build/applications/raspberry_lan9252demo" using the following command:
 
 ```sudo ./GetSensorData```
 
-Data should be stream from RPI to LAN9252 EtherCat Slave.
+Data should now be streamed from the Raspberry Pi to the LAN 9252 EtherCAT Slave.
 
-Copy gb_lan9252.xml file to the "C:\TwinCAT\3.1\Config\Io\EtherCAT"
-and then scan the IO in the TwinCat, EtherCat Slave shoud be detected with the name "Box 5(generic)", green LED should be fixed showing the data is streamed.
+
+## Configuration in TwinCAT
+Copy the "gb_lan9252.xml" file to "C:\TwinCAT\3.1\Config\Io\EtherCAT" and scan the I/O in TwinCAT. The EtherCAT Slave should be detected with the name "Box 5(generic)," and the green LED should be fixed, indicating that data is being streamed.
+
+
