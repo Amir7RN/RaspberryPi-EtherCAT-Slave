@@ -1,4 +1,4 @@
-# RaspberryPi-EtherCAT-Slave
+# MAke RaspberryPi an EtherCAT Slave
 
 This project demonstrates the integration of IMU data streaming and SPI communication on a Raspberry Pi to communicate with an EtherCAT slave module (LAN9252). It includes three main components:
 
