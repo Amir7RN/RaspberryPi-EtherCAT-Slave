@@ -39,7 +39,8 @@ If you need to change the size of output data, make the same changes for lines 2
 
 Update the XML file accordingly. For example:
 
-```<SubItem>
+```
+<SubItem>
     <SubIdx>28</SubIdx>
     <Name>IMU2_Quat2</Name>
     <Type>INT</Type>
@@ -49,7 +50,8 @@ Update the XML file accordingly. For example:
         <Access>ro</Access>
         <PdoMapping>T</PdoMapping>
     </Flags>
-</SubItem>```
+</SubItem>
+```
 
 
 In this demo, the random number is assigned to input IMU1_Pitch (line 58 in SPI_Transmit.c):
