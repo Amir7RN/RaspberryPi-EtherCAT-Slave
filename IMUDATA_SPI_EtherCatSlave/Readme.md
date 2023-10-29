@@ -1,13 +1,14 @@
 Stream IMU data to RPI and then Transmit to LAN 9252 using SPI communication
 
-Using the following instruction the IMU data can be transfereed using ethercat and monitored in TwinCat.
+This guide explains how to transmit IMU data via EtherCAT and monitor it in TwinCat. The SPI transmission is limited to C, so we create a C library to wrap the C++ code for streaming IMU data. 
 
-SPI tranmist is restricted by C and IMU data is streamed using C++ code, So we need to add a wrapper for the C++ and make it as a C library:
+## Modify the IMU C++ Code
+Add the following lines to the IMU C++ code (found in the "StreamData_to_RPI" directory):
 
-add the following lines to the IMU c++ code (StreamData_to_RPI directory):
+```cpp
 extern "C" {
-void getSensorData(int* Pitch,int* Roll,int* Yaw,int* GyroX,int* GyroY,int* GyroZ,int* AccelX,int* AccelY,int* AccelZ) {
-}
+void getSensorData(int* Pitch, int* Roll, int* Yaw, int* GyroX, int* GyroY, int* GyroZ, int* AccelX, int* AccelY, int* AccelZ) {
+}```
 
 full code can be found in IMUDATA_SPI_EtherCatSlave/application/raspberry_lan9252demo/getSensorData.cpp
 
