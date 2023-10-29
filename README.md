@@ -1,4 +1,4 @@
-# MAke RaspberryPi an EtherCAT Slave
+# Make RaspberryPi an EtherCAT Slave
 
 This project demonstrates the integration of IMU data streaming and SPI communication on a Raspberry Pi to communicate with an EtherCAT slave module (LAN9252). It includes three main components:
 
@@ -8,7 +8,7 @@ Folder: `1-StreamIMUData_to_RPI`
 
 In this folder, you'll find C++ code that shows how to stream data from the MicroStrain 3DM CV7 AHRS IMU (Inertial Measurement Unit) to a Raspberry Pi. The provided code serves as an example of collecting IMU data on a Raspberry Pi.
 
-## 2. Simple demo of trasnmitting a integer value from Raspberry PI to EtherCat Slave via SPI
+## 2. Simple demo of transmitting an integer value from Raspberry PI to EtherCat Slave via SPI
 
 Folder: `2-Demo_SPITransmit_RPI_to_EtherCatSlave`
 
