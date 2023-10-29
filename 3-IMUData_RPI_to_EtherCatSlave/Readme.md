@@ -42,10 +42,10 @@ Check directory IMUDATA_SPI_EtherCatSlave/applications/raspberry_lan9252demo/mai
 
 Make sure to include other required libraries, such as "unistd.h," "stdlib.h".
 
+
 ## Stream Sensor Data from C++
 
 ```
-
 int Pitch, Roll, Yaw, GyroX, GyroY, GyroZ, AccelX, AccelY, AccelZ;
 int sensorData[9];
 
