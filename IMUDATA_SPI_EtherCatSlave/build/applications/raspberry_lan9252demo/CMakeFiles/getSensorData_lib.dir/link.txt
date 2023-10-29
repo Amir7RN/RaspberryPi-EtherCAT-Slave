@@ -1,0 +1,2 @@
+/usr/bin/ar qc libgetSensorData_lib.a CMakeFiles/getSensorData_lib.dir/getSensorData.cpp.o
+/usr/bin/ranlib libgetSensorData_lib.a

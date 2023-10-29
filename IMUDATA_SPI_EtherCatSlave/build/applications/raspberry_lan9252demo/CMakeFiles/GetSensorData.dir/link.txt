@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/GetSensorData.dir/main.c.o CMakeFiles/GetSensorData.dir/slave_objectlist.c.o -o GetSensorData  -Wl,-rpath,/usr/share/c++-mscl: ../../soes/libsoes.a -lbcm2835 libgetSensorData_lib.a /usr/share/c++-mscl/libmscl.so -lstdc++ -lpthread -L/usr/share/c++-mscl -lmscl 
