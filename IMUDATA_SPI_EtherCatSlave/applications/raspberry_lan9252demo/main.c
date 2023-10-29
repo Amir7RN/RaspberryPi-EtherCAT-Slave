@@ -13,20 +13,25 @@
 _Objects Obj;
 _Mbuffer Mb;
 
-// SPI Constants
 
-
+// Function to get input data
 void cb_get_inputs(void) {
+    // Add code here to get input data if needed
 }
 
 
+// Initialize GPIO pins using bcm2835 library
 void GPIO_init(void) {
     bcm2835_init();
 }
 
+
+// Variables to store sensor data
+
 int IMU1_Pitch, IMU1_Roll, IMU1_Yaw, IMU1_GyroX, IMU1_GyroY, IMU1_GyroZ, IMU1_AccelX, IMU1_AccelY, IMU1_AccelZ;
 int sensorData[9];
 
+// Thread to continuously update sensor data
 void* Thread(void* arg) {
     int* sensorData = (int*)arg;
     int* IMU1_Pitch = &sensorData[0];
@@ -53,6 +58,7 @@ void* Thread(void* arg) {
 
 int16_t received_data = 0;
 
+// Function to transmit data via SPI and receive the response
 int16_t SPI_transmit_int(int data)
 {
    
@@ -62,25 +68,28 @@ int16_t SPI_transmit_int(int data)
     spi_data[2] = (int16_t)(data & 0xFF);
     
     
-    
+        // Transmit data
     bcm2835_spi_transfernb((char*)spi_data, (char*)spi_data, sizeof(spi_data));
     
     usleep(10);
-    
+
+        // Prepare for reading data
     spi_data[0] = ESC_CMD_SERIAL_READ;
     
     bcm2835_spi_transfernb((char*)spi_data, (char*)spi_data, sizeof(spi_data));
     
     
-    
+        // Combine received bytes to form a 16-bit integer
     int16_t received_data_unit = (int16_t)(((int32_t)spi_data[1] << 8) | (int32_t)spi_data[2]);
     received_data = received_data_unit;
     return received_data;
     //printf("received_dataf: %d\n", received_dataf);
 }
 
+// Array to store received sensor data
 int Received_data[9];
 
+// Function to set outputs with sensor data
 void cb_set_outputs(int IMU1_Pitch, int IMU1_Roll, int IMU1_Yaw, int IMU1_GyroX, int IMU1_GyroY, int IMU1_GyroZ, int IMU1_AccelX, int IMU1_AccelY, int IMU1_AccelZ)
 {
 
@@ -91,6 +100,7 @@ void cb_set_outputs(int IMU1_Pitch, int IMU1_Roll, int IMU1_Yaw, int IMU1_GyroX,
     for (int i = 0; i < 9; i++) {
         
         if ((int)(transmit_data[i]) == 56 ) {
+                        // If the data is 56, send 55 instead, for some reason I got "segmentation fault when the vale "56" is transmitting.
             Received_data[i] = SPI_transmit_int(55);
         } 
         else {
@@ -98,7 +108,8 @@ void cb_set_outputs(int IMU1_Pitch, int IMU1_Roll, int IMU1_Yaw, int IMU1_GyroX,
         }
         
     }
-   
+    
+       // Update Object structure with received sensor data
     Obj.in.IMU1_Pitch = (int16_t)(Received_data[0]);
     Obj.in.IMU1_Roll = (int16_t)(Received_data[1]);
     Obj.in.IMU1_Yaw = (int16_t)(Received_data[2]);
@@ -110,7 +121,7 @@ void cb_set_outputs(int IMU1_Pitch, int IMU1_Roll, int IMU1_Yaw, int IMU1_GyroX,
     Obj.in.IMU1_AccelZ = (int16_t)(Received_data[8]);
 }
 
-
+// Main function for the application
 int main_run (void * arg)
 {
    static esc_cfg_t config =
@@ -135,13 +146,15 @@ int main_run (void * arg)
 
    GPIO_init();
    ecat_slv_init (&config);
+    
    
-   
+       // Create a thread for updating sensor data
     pthread_t thread;
     int sensorData[18]; // Array to hold sensor values
 
     pthread_create(&thread, NULL, Thread, sensorData);
-    
+
+        // Continuous processing loop
    while (1)
     {
         ecat_slv();
@@ -152,12 +165,14 @@ int main_run (void * arg)
                         sensorData[8]);    
     }
     
+        // Wait for the sensor data thread to finish
     pthread_join(thread, NULL);
 
     return 0;
 
 }
 
+// Entry point of the application
 int main (void)
 {
    
