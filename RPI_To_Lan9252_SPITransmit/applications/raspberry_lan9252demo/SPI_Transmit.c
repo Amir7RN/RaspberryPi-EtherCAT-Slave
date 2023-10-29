@@ -45,7 +45,7 @@ void cb_transmit(void)
     int16_t transmit_value;
     
     do {
-        transmit_value = generate_random_negative_value();
+        transmit_value = generate_random_value();
     } while (transmit_value == 56);
     
     SPI_transmit(transmit_value);
