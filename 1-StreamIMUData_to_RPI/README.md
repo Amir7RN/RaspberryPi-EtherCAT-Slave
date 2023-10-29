@@ -1,5 +1,6 @@
 # Stream IMU data to Raspberry PI
 
+Microstrain 3DM-CV7-AHRS IMU is communicating via UART (`https://www.microstrain.com/inertial-sensors/3dm-cv7-ahrs`)
 ## Install MSCL Package
 Follow the instructions for installing the MSCL package from the official repository: https://github.com/LORD-MicroStrain/MSCL
 
