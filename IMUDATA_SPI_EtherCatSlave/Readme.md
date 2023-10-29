@@ -33,7 +33,7 @@ void getSensorData(int* IMU1_Pitch,int* IMU1_Roll,int* IMU1_Yaw,int* IMU1_GyroX,
 #endif```
 
 
-Add this header to your main C code, which is needed for transmitting data using SPI. Include it in the "main.c" file:
+Add this header to your main C code, which is needed for transmitting data using SPI. Include it in the "main.c" file (The source code can be found in the SOES GitHub repository.):
 
 Check directory IMUDATA_SPI_EtherCatSlave/applications/raspberry_lan9252demo/main.c for comments and details
 
@@ -114,7 +114,7 @@ int16_t SPI_transmit_int(int data)
 
 ## Sending SPI Transferred Data to LAN 9252 Memory
 
-This section explains how to send data transferred via SPI to the allocated memory of the LAN 9252 device. This data can be monitored and tracked in the gb_lan.xml file on the master PC.
+This section explains how to send data transferred via SPI to the allocated memory of the LAN 9252 device. This data can be monitored and tracked in the gb_lan.xml file on the master PC (The original gb_lan9252.XML and objectlist.c were downloaded from https://www.github.com/glowbuzzer/gblan9252_soes).
 
 ```
 int Received_data[9];
