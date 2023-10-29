@@ -63,4 +63,4 @@ Then build the executable:
 
 
 '''cmake -B build -DRPI_VARIANT=ON'''
-'''cmake --build build'''
+```cmake --build build```
