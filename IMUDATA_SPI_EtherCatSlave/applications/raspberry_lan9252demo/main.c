@@ -100,7 +100,7 @@ void cb_set_outputs(int IMU1_Pitch, int IMU1_Roll, int IMU1_Yaw, int IMU1_GyroX,
     for (int i = 0; i < 9; i++) {
         
         if ((int)(transmit_data[i]) == 56 ) {
-                        // If the data is 56, send 55 instead, for some reason I got "segmentation fault when the vale "56" is transmitting.
+                        // If the data is 56, send 55 instead, for some reason I got "segmentation fault when the value "56" is transmitting.
             Received_data[i] = SPI_transmit_int(55);
         } 
         else {
