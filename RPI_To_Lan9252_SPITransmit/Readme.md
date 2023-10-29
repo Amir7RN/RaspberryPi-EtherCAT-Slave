@@ -53,6 +53,7 @@ Update the XML file accordingly. For example:
 </SubItem>
 ```
 
+(The original gb_lan9252.XML and objectlist.c were downloaded from https://www.github.com/glowbuzzer/gblan9252_soes)
 
 In this demo, the random number is assigned to input IMU1_Pitch (line 58 in SPI_Transmit.c):
 
